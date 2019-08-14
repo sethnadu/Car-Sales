@@ -18,14 +18,21 @@ const initialState = {
 export const storeReducer = (state = initialState, action) => {
     switch( action.type ) {
         case "ADDED_FEATURE":
+            console.log(state.car)
             return {
                 ...state,
-                car: {features: [...state.car.features, action.payload]} 
+                car: {features: [...state.car.features, action.payload], price: state.car.price, name: state.car.name, image: state.car.image} 
             };
         case "ADDED_ADDITIONALPRICE":
+            const priceUpdate = [state.additionalPrice]
+            const reducer = ((num, total) => {return num + total})
+            console.log(state.additionalPrice)
             return {
                 ...state,
-                additionalPrice: [state.additionalPrice + action.payload]
+                additionalPrice: priceUpdate.reduce(reducer, action.payload)
+
+                    
+                
             };
         // case ""
         default: 
