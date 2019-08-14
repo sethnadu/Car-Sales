@@ -17,7 +17,17 @@ const initialState = {
 
 export const storeReducer = (state = initialState, action) => {
     switch( action.type ) {
-    
+        case "ADDED_FEATURE":
+            return {
+                ...state,
+                car: {features: [...state.car.features, action.payload]} 
+            };
+        case "ADDED_ADDITIONALPRICE":
+            return {
+                ...state,
+                additionalPrice: [state.additionalPrice + action.payload]
+            };
+        // case ""
         default: 
         return state;
     }

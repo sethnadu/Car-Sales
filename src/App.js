@@ -6,6 +6,8 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 
+import { addNewFeature, addAdditionalPrice } from "./Actions/index.js";
+
 
 const App = props => {
   // const state = {
@@ -30,7 +32,10 @@ const App = props => {
   };
 
   const buyItem = item => {
-    // dipsatch an action here to add an item
+    console.log(item)
+    props.addNewFeature(item)
+    props.addAdditionalPrice(item.price)
+    console.log(item.price)
   };
 
   return (
@@ -40,7 +45,7 @@ const App = props => {
         <AddedFeatures car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures store={props.store} />
+        <AdditionalFeatures buyItem = {buyItem} store={props.store} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -48,7 +53,6 @@ const App = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     additionalPrice: state.additionalPrice,
     car: state.car,
@@ -57,4 +61,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {addNewFeature, addAdditionalPrice})(App);
