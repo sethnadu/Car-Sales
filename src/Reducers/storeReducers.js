@@ -38,7 +38,7 @@ export const storeReducer = (state = initialState, action) => {
                 car:  {features: state.car.features.filter(feature =>{ return feature.id !== action.payload }), price: state.car.price, name: state.car.name, image: state.car.image} 
             }
         case "REMOVE_ADDITIONALPRICE":
-            const reducer2 = ((num, total) => {return num - total})
+            const reducer2 = ((num, total) => {return total - num})
             console.log(state.additionalPrice)
             return {
                 ...state,
