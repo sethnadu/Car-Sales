@@ -12,15 +12,15 @@ import { addNewFeature, addAdditionalPrice, removeAFeature, removeAdditionalPric
 const App = props => {
  
   const removeFeature = feature => {
-    props.removeAFeature(feature.id)
+    props.removeAFeature(feature)
     props.removeAdditionalPrice(feature.price)
     console.log(feature.id)
   };
 
   const buyItem = item => {
-     props.addNewFeature(item)
     props.addAdditionalPrice(item.price)
-    console.log(item.price)
+    props.addNewFeature(item)
+    console.log(props.features)
   };
 
   return (
@@ -42,7 +42,7 @@ const mapStateToProps = state => {
     additionalPrice: state.additionalPrice,
     car: state.car,
     store: state.store,
-    // features: state.car.features
+   
 
   }
 }

@@ -21,9 +21,11 @@ export const storeReducer = (state = initialState, action) => {
     switch( action.type ) {
         case "ADDED_FEATURE":
             console.log(state.car)
+            const filterdStore = state.store.filter(feature => feature !== action.payload)
             return {
                 ...state,
-                car: {features: [...state.car.features, action.payload], price: state.car.price, name: state.car.name, image: state.car.image} 
+                car: {features: [...state.car.features, action.payload], price: state.car.price, name: state.car.name, image: state.car.image},
+                store: filterdStore
             };
         case "ADDED_ADDITIONALPRICE":
             const reducer = ((num, total) => {return num + total})
@@ -33,9 +35,11 @@ export const storeReducer = (state = initialState, action) => {
                 additionalPrice: priceUpdate.reduce(reducer, action.payload) 
             };
         case "REMOVE_FEATURE":
+              const newStore = [...state.store, action.payload];
             return {
                 ...state,
-                car:  {features: state.car.features.filter(feature =>{ return feature.id !== action.payload }), price: state.car.price, name: state.car.name, image: state.car.image} 
+                car:  {features: state.car.features.filter(feature =>{ return feature !== action.payload }), price: state.car.price, name: state.car.name, image: state.car.image},
+                store: newStore
             }
         case "REMOVE_ADDITIONALPRICE":
             const reducer2 = ((num, total) => {return total - num})
