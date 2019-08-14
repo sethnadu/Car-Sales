@@ -6,34 +6,19 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 
-import { addNewFeature, addAdditionalPrice } from "./Actions/index.js";
+import { addNewFeature, addAdditionalPrice, removeAFeature, removeAdditionalPrice } from "./Actions/index.js";
 
 
 const App = props => {
-  // const state = {
-  //   additionalPrice: 0,
-  //   car: {
-  //     price: 26395,
-  //     name: '2019 Ford Mustang',
-  //     image:
-  //       'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-  //     features: []
-  //   },
-  //   store: [
-  //     { id: 1, name: 'V-6 engine', price: 1500 },
-  //     { id: 2, name: 'Racing detail package', price: 1500 },
-  //     { id: 3, name: 'Premium sound system', price: 500 },
-  //     { id: 4, name: 'Rear spoiler', price: 250 }
-  //   ]
-  // };
-
-  const removeFeature = item => {
-    // dispatch an action here to remove an item
+ 
+  const removeFeature = feature => {
+    props.removeAFeature(feature)
+    props.removeAdditionalPrice(feature.price)
+    console.log(feature.id)
   };
 
   const buyItem = item => {
-    console.log(item)
-    props.addNewFeature(item)
+     props.addNewFeature(item)
     props.addAdditionalPrice(item.price)
     console.log(item.price)
   };
@@ -42,10 +27,10 @@ const App = props => {
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
-        <AddedFeatures car={props.car} />
+        <AddedFeatures removeFeature={removeFeature} car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures buyItem = {buyItem} store={props.store} />
+        <AdditionalFeatures   buyItem = {buyItem} store={props.store} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -57,8 +42,9 @@ const mapStateToProps = state => {
     additionalPrice: state.additionalPrice,
     car: state.car,
     store: state.store,
+    // features: state.car.features
 
   }
 }
 
-export default connect(mapStateToProps, {addNewFeature, addAdditionalPrice})(App);
+export default connect(mapStateToProps, {addNewFeature, addAdditionalPrice, removeAFeature, removeAdditionalPrice})(App);
