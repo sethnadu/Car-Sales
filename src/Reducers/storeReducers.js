@@ -24,7 +24,7 @@ export const storeReducer = (state = initialState, action) => {
             const filterdStore = state.store.filter(feature => feature !== action.payload)
             return {
                 ...state,
-                car: {features: [...state.car.features, action.payload], price: state.car.price, name: state.car.name, image: state.car.image},
+                car: {...state.car, features: [...state.car.features, action.payload]},
                 store: filterdStore
             };
         case "ADDED_ADDITIONALPRICE":
@@ -38,7 +38,7 @@ export const storeReducer = (state = initialState, action) => {
               const newStore = [...state.store, action.payload];
             return {
                 ...state,
-                car:  {features: state.car.features.filter(feature =>{ return feature !== action.payload }), price: state.car.price, name: state.car.name, image: state.car.image},
+                car:  { ...state.car, features: state.car.features.filter(feature =>{ return feature !== action.payload })},
                 store: newStore
             }
         case "REMOVE_ADDITIONALPRICE":
