@@ -12,7 +12,7 @@ import { addNewFeature, addAdditionalPrice, removeAFeature, removeAdditionalPric
 const App = props => {
  
   const removeFeature = feature => {
-    props.removeAFeature(feature)
+    props.removeAFeature(feature.id)
     props.removeAdditionalPrice(feature.price)
     console.log(feature.id)
   };
